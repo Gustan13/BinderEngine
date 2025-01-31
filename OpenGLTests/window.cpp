@@ -1,6 +1,6 @@
 #include "window.h"
 
-void process_window(GLFWwindow* window, Camera* camera, float deltaTime) {
+void process_window(GLFWwindow* window, Camera* camera, float deltaTime, GameObject* player) {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 
@@ -16,6 +16,11 @@ void process_window(GLFWwindow* window, Camera* camera, float deltaTime) {
         camera->yaw -= 0.5f;
     if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
         camera->yaw += 0.5f;
+
+    if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
+        player->playAnimation();
+    else
+        player->stopAnimation();
 
     camera->setDirection(cos(glm::radians(camera->yaw)), sin(glm::radians(camera->yaw)));
 }
